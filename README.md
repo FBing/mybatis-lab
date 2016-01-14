@@ -1,4 +1,3 @@
-# mybatis-lab
 Mybatis 3.x Code Lab
 ====================
 Mybatis 3 学习笔记
