@@ -25,7 +25,10 @@
 	</environments>
 
 	<mappers>
+		<mapper resource="SectionMapper.xml" />
 		<mapper resource="BlogMapper.xml" />
+		<mapper resource="AuthorMapper.xml" />
+		<mapper resource="CommentMapper.xml" />
 	</mappers>
 
 </configuration>

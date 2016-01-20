@@ -3,7 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ricky.mybatis.lab.BlogMapper">
-  <select id="selectBlog" resultType="Blog">
-    select * from Blog where id = #{id}
-  </select>
+
+	<select id="selectBlog" resultType="Blog">
+		SELECT * FROM dict_blog WHERE id = #{id}
+	</select>
+	
+	<insert id="insertBlog" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dict_blog (title,content,section_id,uid,publish_time)
+		VALUES (#{title},#{content},#{section_id},#{uid},#{publish_time})
+	</insert>
+
+	<update id="updateBlog">
+		UPDATE dict_blog SET
+		title = #{title},
+		content = #{content},
+		section_id = #{section_id},
+		uid = #{uid},
+		update_time = #{update_time}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="deleteBlog">
+		DELETE FROM dict_blog WHERE id = #{id}
+	</delete>
 </mapper>
