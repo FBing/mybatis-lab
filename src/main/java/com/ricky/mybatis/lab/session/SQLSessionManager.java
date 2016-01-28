@@ -2,46 +2,44 @@ package com.ricky.mybatis.lab.session;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class SQLSessionManager {
 	
-	private volatile static SQLSessionManager sessionManager;
-	
-	private SqlSessionFactory sqlSessionFactory;
+	private volatile static SqlSessionFactory sqlSessionFactory;
 	
 	private SQLSessionManager(){
-		try {
-			init();
-		} catch (IOException e) {
-			throw new RuntimeException("mybatis init error", e);
-		}
+		
 	}
 	
-	public static SQLSessionManager getManager(){
-		if(sessionManager==null){
+	public static SqlSessionFactory getSqlSessionFactory(){
+		
+		if(sqlSessionFactory==null){
 			synchronized (SQLSessionManager.class) {
-				if(sessionManager==null){
-					sessionManager = new SQLSessionManager();
+				if(sqlSessionFactory==null){
+					sqlSessionFactory = init();
 				}
 			}
 		}
-		return sessionManager;
-	}
-	
-	public SqlSession getSqlSession(){
 		
-		return sqlSessionFactory.openSession();
+		return sqlSessionFactory;
 	}
 	
-	private void init() throws IOException{
+	private static SqlSessionFactory init() {
 		
 		System.out.println("init");
 		
-		InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
-		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		SqlSessionFactory sessionFactory = null;
+		try {
+			InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+			sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+			return sessionFactory;
+		} catch (IOException e) {
+			throw new RuntimeException("read mybatis-config.xml error", e);
+		}
+		
 	}
 }

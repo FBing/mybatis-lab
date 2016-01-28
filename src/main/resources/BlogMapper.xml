@@ -4,16 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ricky.mybatis.lab.BlogMapper">
 
-	<select id="selectBlog" resultType="Blog">
+	<!-- 返回所有Blog -->
+	<select id="selectAllBlog" resultType="Blog">
+		SELECT * FROM dict_blog
+	</select>
+
+	<select id="selectBlog" parameterType="int" resultType="Blog">
 		SELECT * FROM dict_blog WHERE id = #{id}
 	</select>
 	
-	<insert id="insertBlog" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insertBlog" parameterType="Blog" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO dict_blog (title,content,section_id,uid,publish_time)
 		VALUES (#{title},#{content},#{section_id},#{uid},#{publish_time})
 	</insert>
 
-	<update id="updateBlog">
+	<update id="updateBlog" parameterType="Blog">
 		UPDATE dict_blog SET
 		title = #{title},
 		content = #{content},
@@ -23,7 +28,7 @@
 		WHERE id = #{id}
 	</update>
 
-	<delete id="deleteBlog">
+	<delete id="deleteBlog" parameterType="int">
 		DELETE FROM dict_blog WHERE id = #{id}
 	</delete>
 </mapper>
