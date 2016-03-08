@@ -1,4 +1,4 @@
-Mybatis 3.x Code Lab
+mybatis 3.x samples
 ====================
 简介
 ----------------------
