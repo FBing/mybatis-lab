@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ricky.codelab.mybatis.sample.AuthorMapper">
-  <select id="selectUserById" resultType="Author">
+<mapper namespace="com.ricky.codelab.mybatis.sample.mapper.AuthorMapper">
+  <select id="selectAuthorById" resultType="Author">
     select * from dict_author where id = #{id}
   </select>
 </mapper>

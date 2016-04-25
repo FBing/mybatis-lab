@@ -2,14 +2,14 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ricky.codelab.mybatis.sample.BlogMapper">
+<mapper namespace="com.ricky.codelab.mybatis.sample.mapper.BlogMapper">
 
 	<!-- 返回所有Blog -->
 	<select id="selectAllBlog" resultType="Blog">
 		SELECT * FROM dict_blog
 	</select>
 
-	<select id="selectBlog" parameterType="int" resultType="Blog">
+	<select id="selectBlogById" parameterType="long" resultType="Blog">
 		SELECT * FROM dict_blog WHERE id = #{id}
 	</select>
 	

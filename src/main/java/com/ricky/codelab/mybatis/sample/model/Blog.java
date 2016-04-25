@@ -45,4 +45,11 @@ public class Blog {
 		this.authorId = authorId;
 	}
 	
+	@Override
+	public String toString() {
+		return "Blog [id=" + id + ", title=" + title + ", content=" + content
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime
+				+ ", authorId=" + authorId + "]";
+	}
+	
 }
