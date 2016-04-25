@@ -6,10 +6,9 @@
 	<properties resource="db.properties" />
 
 	<typeAliases>
-		<typeAlias alias="Author" type="com.ricky.mybatis.lab.model.Author" />
-		<typeAlias alias="Blog" type="com.ricky.mybatis.lab.model.Blog" />
-		<typeAlias alias="Comment" type="com.ricky.mybatis.lab.model.Comment" />
-		<typeAlias alias="Section" type="com.ricky.mybatis.lab.model.Section" />
+		<typeAlias alias="Author" type="com.ricky.codelab.mybatis.sample.model.Author" />
+		<typeAlias alias="Blog" type="com.ricky.codelab.mybatis.sample.model.Blog" />
+		<typeAlias alias="Comment" type="com.ricky.codelab.mybatis.sample.model.Comment" />
 	</typeAliases>
 
 	<!-- <environments default="development">
@@ -23,10 +22,11 @@
 			</dataSource>
 		</environment>
 	</environments> -->
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
-			<dataSource type="com.ricky.mybatis.lab.datasource.C3P0DataSourceFactory">
+			<dataSource type="com.ricky.codelab.mybatis.sample.ds.C3P0DataSourceFactory">
                 <property name="driverClass" value="${driver}" />
                 <property name="jdbcUrl" value="${url}" />
                 <property name="user" value="${username}" />
@@ -39,18 +39,13 @@
                 <property name="acquireIncrement" value="1" />
                 <property name="maxStatements" value="1000" />
                 
-                <property name="idleConnectionTestPeriod" value="60" />
-                <property name="acquireRetryAttempts" value="20" />
-                <property name="breakAfterAcquireFailure" value="true" />
-                <property name="testConnectionOnCheckout" value="false" />
             </dataSource>
 		</environment>
 	</environments>
 
 	<mappers>
-		<mapper resource="SectionMapper.xml" />
-		<mapper resource="BlogMapper.xml" />
 		<mapper resource="AuthorMapper.xml" />
+		<mapper resource="BlogMapper.xml" />
 		<mapper resource="CommentMapper.xml" />
 	</mappers>
 

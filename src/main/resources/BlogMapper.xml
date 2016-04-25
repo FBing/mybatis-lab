@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ricky.mybatis.lab.BlogMapper">
+<mapper namespace="com.ricky.codelab.mybatis.sample.BlogMapper">
 
 	<!-- 返回所有Blog -->
 	<select id="selectAllBlog" resultType="Blog">
