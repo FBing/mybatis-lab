@@ -6,6 +6,7 @@ CREATE TABLE `dict_user` (
   `age` smallint(3) NOT NULL,
   `email` varchar(40) NOT NULL,
   `gender` SMALLINT(2) NOT NULL,
+  `register_time` DATETIME NOT NULL DEFAULT 'now()',
   `status` smallint(2) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `user_index`(`name`)

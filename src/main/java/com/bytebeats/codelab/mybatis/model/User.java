@@ -15,6 +15,7 @@ public class User {
     private int age;
     private String email;
     private int gender;
+    private int status;
     private Date registerTime;  //注册时间
 
     public long getId() {
@@ -55,6 +56,22 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Date getRegisterTime() {
