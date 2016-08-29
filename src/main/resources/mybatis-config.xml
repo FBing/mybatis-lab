@@ -1,52 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration
-  PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
 
-	<properties resource="db.properties" />
+	<settings>
+		<setting name="defaultExecutorType" value="SIMPLE"/>
+		<setting name="defaultStatementTimeout" value="25"/>
+		<setting name="defaultFetchSize" value="100"/>
+		<setting name="mapUnderscoreToCamelCase" value="false"/>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
 
 	<typeAliases>
-		<typeAlias alias="Author" type="com.ricky.codelab.mybatis.sample.model.Author" />
-		<typeAlias alias="Blog" type="com.ricky.codelab.mybatis.sample.model.Blog" />
-		<typeAlias alias="Comment" type="com.ricky.codelab.mybatis.sample.model.Comment" />
+		<typeAlias alias="User" type="com.bytebeats.codelab.mybatis.model.User" />
 	</typeAliases>
-
-	<!-- <environments default="development">
-		<environment id="development">
-			<transactionManager type="JDBC" />
-			<dataSource type="POOLED">
-				<property name="driver" value="${driver}" />
-				<property name="url" value="${url}" />
-				<property name="username" value="${username}" />
-				<property name="password" value="${password}" />
-			</dataSource>
-		</environment>
-	</environments> -->
-	
-	<environments default="development">
-		<environment id="development">
-			<transactionManager type="JDBC" />
-			<dataSource type="com.ricky.codelab.mybatis.sample.ds.C3P0DataSourceFactory">
-                <property name="driverClass" value="${driver}" />
-                <property name="jdbcUrl" value="${url}" />
-                <property name="user" value="${username}" />
-                <property name="password" value="${password}" />
-                
-                <property name="initialPoolSize" value="2" />
-                <property name="maxPoolSize" value="5" />
-                <property name="minPoolSize" value="1" />
-                <property name="maxIdleTime" value="1800" />
-                <property name="acquireIncrement" value="1" />
-                <property name="maxStatements" value="1000" />
-                
-            </dataSource>
-		</environment>
-	</environments>
-
-	<mappers>
-		<mapper resource="AuthorMapper.xml" />
-		<mapper resource="BlogMapper.xml" />
-		<mapper resource="CommentMapper.xml" />
-	</mappers>
 
 </configuration>
