@@ -17,6 +17,8 @@ public interface IUserDao {
 
     int update(User user);
 
+    int delete(long id);
+
     User queryById(long id);
 
     List<User> queryUsers();

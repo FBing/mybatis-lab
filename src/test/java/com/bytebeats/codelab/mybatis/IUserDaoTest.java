@@ -26,6 +26,35 @@ public class IUserDaoTest {
     private IUserDao userDao;
 
     @Test
+    public void testQuery(){
+
+        User user = userDao.queryById(323333333333l);
+        System.out.println(user);
+    }
+
+    @Test
+    public void testQueryList(){
+
+        List<User> users = userDao.queryUsers();
+        System.out.println(users);
+    }
+
+    @Test
+    public void testInsert(){
+
+        User user = new User();
+        user.setName("jordan");
+        user.setPassword("1234");
+        user.setAge(28);
+        user.setEmail("jordan@163.com");
+        user.setGender(1);
+        user.setRegisterTime(new Date());
+
+        long id = userDao.insert(user);
+        System.out.println("id:"+user.getId());
+    }
+
+    @Test
     public void testInsertBatch(){
 
         List<User> userList = new ArrayList<>();

@@ -13,13 +13,17 @@
     <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
-  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
-  	select * from tb_user where id = #{id,jdbcType=VARCHAR}
+  <select id="selectList" resultMap="BaseResultMap">
+    select * from tb_user
   </select>
 
-  <insert id="insert" parameterType="User" >
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  	select * from tb_user where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <insert id="insert" parameterType="User">
     insert into tb_user (name, password, age,
-      email, gender, registerTime)
+      email, gender, register_time)
     values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
       #{email,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, now())
   </insert>

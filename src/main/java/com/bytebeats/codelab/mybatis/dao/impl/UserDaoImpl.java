@@ -34,16 +34,25 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public int update(User user) {
-        return 0;
+
+        return baseDao.getSqlSession().update("com.bytebeats.codelab.mybatis.mapper.UserMapper.updateById", user);
+    }
+
+    @Override
+    public int delete(long id) {
+
+        return baseDao.getSqlSession().delete("com.bytebeats.codelab.mybatis.mapper.UserMapper.deleteById", id);
     }
 
     @Override
     public User queryById(long id) {
-        return null;
+
+        return baseDao.getSqlSession().selectOne("com.bytebeats.codelab.mybatis.mapper.UserMapper.selectById", id);
     }
 
     @Override
     public List<User> queryUsers() {
-        return null;
+
+        return baseDao.getSqlSession().selectList("com.bytebeats.codelab.mybatis.mapper.UserMapper.selectList");
     }
 }
