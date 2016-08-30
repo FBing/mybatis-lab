@@ -10,7 +10,6 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="gender" property="gender" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
-    <result column="NOTE" property="note" jdbcType="VARCHAR" />
     <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
@@ -23,6 +22,15 @@
       email, gender, registerTime)
     values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
       #{email,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, now())
+  </insert>
+  <insert id="batchInsert" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO tb_user
+    (name, password,age, email,gender,register_time)
+    VALUES
+    <foreach collection="list" item="user" index="index" separator="," >
+      (#{user.name},#{user.password},#{user.age},#{user.email},
+      #{user.gender},#{user.registerTime})
+    </foreach>
   </insert>
 
   <update id="updateById" parameterType="User" >

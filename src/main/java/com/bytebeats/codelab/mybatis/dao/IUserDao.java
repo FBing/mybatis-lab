@@ -13,6 +13,8 @@ public interface IUserDao {
 
     long insert(User user);
 
+    int insertBatch(List<User> list);
+
     int update(User user);
 
     User queryById(long id);

@@ -1,13 +1,13 @@
 
-CREATE TABLE `dict_user` (
+CREATE TABLE `tb_user` (
   `id` BIGINT(12) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `age` smallint(3) NOT NULL,
-  `email` varchar(40) NOT NULL,
-  `gender` SMALLINT(2) NOT NULL,
-  `register_time` DATETIME NOT NULL DEFAULT 'now()',
-  `status` smallint(2) NOT NULL DEFAULT '1',
+  `name` VARCHAR(20) NOT NULL,
+  `password` VARCHAR(20) NOT NULL,
+  `age` SMALLINT(3) NOT NULL,
+  `email` VARCHAR(40) NOT NULL,
+  `gender` SMALLINT(2) NOT NULL DEFAULT '0',
+  `register_time` DATETIME NOT NULL,
+  `status` SMALLINT(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_index`(`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

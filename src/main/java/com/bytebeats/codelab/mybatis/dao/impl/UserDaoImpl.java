@@ -27,6 +27,12 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
+    public int insertBatch(List<User> list) {
+
+        return baseDao.getSqlSession().insert("com.bytebeats.codelab.mybatis.mapper.UserMapper.batchInsert", list);
+    }
+
+    @Override
     public int update(User user) {
         return 0;
     }
