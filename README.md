@@ -1,4 +1,4 @@
-mybatis 3.x samples
+mybatis3 best practice
 ====================
 简介
 ----------------------

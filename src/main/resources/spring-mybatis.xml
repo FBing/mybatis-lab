@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
-http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans.xsd
-http://www.springframework.org/schema/context
-http://www.springframework.org/schema/context/spring-context.xsd
-http://www.springframework.org/schema/tx
-http://www.springframework.org/schema/tx/spring-tx.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:property-placeholder location="classpath:mysql.properties" ignore-unresolvable="true"/>
+    <util:properties id="db" location="classpath:db.properties"/>
 
     <!-- 配置数据源 -->
-    <bean abstract="true" name="parentDatasource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="driverClassName" value="${ds1.jdbc.driverClassName}" />
+    <bean name="parentDatasource" abstract="true" class="com.alibaba.druid.pool.DruidDataSource">
         <!-- 初始化连接大小 -->
         <property name="initialSize" value="1" />
         <!-- 连接池最大使用连接数量 -->
@@ -20,8 +21,6 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
         <property name="minIdle" value="20" />
         <!-- 获取连接最大等待时间 -->
         <property name="maxWait" value="30000" />
-        <!-- <property name="poolPreparedStatements" value="true" /> -->
-        <!-- <property name="maxPoolPreparedStatementPerConnectionSize" value="33" /> -->
         <property name="validationQuery" value="SELECT 1" />
         <property name="testOnBorrow" value="true" />
         <property name="testOnReturn" value="true" />
@@ -37,38 +36,53 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
         <!-- 关闭abanded连接时输出错误日志 -->
         <property name="logAbandoned" value="true" />
         <!-- 监控数据库 -->
-        <!-- <property name="filters" value="stat" /> -->
         <property name="filters" value="mergeStat" />
     </bean>
 
-    <!-- 配置数据源 -->
-    <bean name="qdDataSource" init-method="init" destroy-method="close" parent="parentDatasource">
-        <property name="url" value="${ds1.jdbc.url}" />
-        <property name="username" value="${ds1.jdbc.username}" />
-        <property name="password" value="${ds1.jdbc.password}" />
-    </bean>
-    <bean name="whDataSource" init-method="init" destroy-method="close" parent="parentDatasource">
-        <property name="url" value="${ds2.jdbc.url}" />
-        <property name="username" value="${ds2.jdbc.username}" />
-        <property name="password" value="${ds2.jdbc.password}" />
+    <!-- trade数据源 -->
+    <bean name="trade" init-method="init" destroy-method="close" parent="parentDatasource">
+        <property name="driverClassName" value="#{db['trade.jdbc.driverClassName']}" />
+        <property name="url" value="#{db['trade.jdbc.url']}" />
+        <property name="username" value="#{db['trade.jdbc.username']}" />
+        <property name="password" value="#{db['trade.jdbc.password']}" />
     </bean>
 
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="qdDataSource" />
-        <property name="configLocation" value="classpath:mybatis-config.xml" />
-        <property name="mapperLocations" value="classpath*:mapper/**/*Mapper.xml" />
+    <!-- admin数据源 -->
+    <bean name="admin" init-method="init" destroy-method="close" parent="parentDatasource">
+        <property name="driverClassName" value="#{db['admin.jdbc.driverClassName']}" />
+        <property name="url" value="#{db['admin.jdbc.url']}" />
+        <property name="username" value="#{db['admin.jdbc.username']}" />
+        <property name="password" value="#{db['admin.jdbc.password']}" />
     </bean>
 
-    <bean id="sqlSessionDao" class="com.bytebeats.codelab.mybatis.dao.SqlSessionDao">
-        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    <!--trade mybatis config-->
+    <bean id="tradeSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="trade" />
+        <property name="mapperLocations" value="classpath*:mapper/trade/*Mapper.xml" />
+        <property name="typeAliasesPackage" value="com.bytebeats.mybatis3.domain.trade" />
     </bean>
 
-    <!-- 配置事务管理器 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.bytebeats.mybatis3.mapper.trade" />
+        <property name="sqlSessionFactoryBeanName" value="tradeSqlSessionFactory" />
+    </bean>
+
+    <!--admin mybatis config-->
+    <bean id="adminSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="admin" />
+        <property name="mapperLocations" value="classpath*:mapper/admin/*Mapper.xml" />
+        <property name="typeAliasesPackage" value="com.bytebeats.mybatis3.domain.admin" />
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.bytebeats.mybatis3.mapper.admin" />
+        <property name="sqlSessionFactoryBeanName" value="adminSqlSessionFactory" />
+    </bean>
+
+    <!-- 配置事务 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="qdDataSource" />
+        <property name="dataSource" ref="trade" />
     </bean>
 
-    <!-- 注解方式配置事物 -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>
