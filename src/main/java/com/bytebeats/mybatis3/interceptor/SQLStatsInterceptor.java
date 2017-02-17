@@ -3,6 +3,9 @@ package com.bytebeats.mybatis3.interceptor;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.plugin.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.util.Properties;
 
@@ -14,6 +17,7 @@ import java.util.Properties;
  */
 @Intercepts({ @Signature(type = StatementHandler.class, method = "prepare", args = { Connection.class, Integer.class}) })
 public class SQLStatsInterceptor implements Interceptor {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -21,7 +25,7 @@ public class SQLStatsInterceptor implements Interceptor {
         StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
         BoundSql boundSql = statementHandler.getBoundSql();
         String sql = boundSql.getSql();
-        System.out.println("exec sql:"+sql);
+        logger.info("mybatis intercept sql:{}", sql);
         return invocation.proceed();
     }
 
@@ -33,6 +37,6 @@ public class SQLStatsInterceptor implements Interceptor {
     @Override
     public void setProperties(Properties properties) {
         String dialect = properties.getProperty("dialect");
-        System.out.println("dialect:"+dialect);
+        logger.info("mybatis intercept dialect:{}", dialect);
     }
 }
