@@ -5,7 +5,6 @@ import com.bytebeats.mybatis3.domain.trade.Order;
 import com.bytebeats.mybatis3.service.admin.UserService;
 import com.bytebeats.mybatis3.service.trade.OrderService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import java.util.List;
 
 /**
