@@ -1,4 +1,4 @@
-mybatis3 best practice
+MyBatis3 Tutorials
 ====================
 简介
 ----------------------
