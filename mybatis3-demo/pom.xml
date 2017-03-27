@@ -5,13 +5,13 @@
 		<artifactId>mybatis3-tutorials</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	
+
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>mybatis3-dao</artifactId>
+	<artifactId>mybatis3-demo</artifactId>
 	<packaging>jar</packaging>
 
-	<name>mybatis3-dao</name>
+	<name>mybatis3-demo</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -140,7 +140,7 @@
 	</profiles>
 
 	<build>
-		<finalName>borrow-speed3</finalName>
+		<finalName>mybatis3-demo</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
