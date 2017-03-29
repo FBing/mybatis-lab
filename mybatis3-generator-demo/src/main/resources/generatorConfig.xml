@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="/libs/mysql-connector-java-5.1.38.jar" />
+    <classPathEntry location="../libs/mysql-connector-java-5.1.38.jar" />
 
     <context id="mbgTables" targetRuntime="MyBatis3">
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
@@ -17,22 +17,22 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.bytebeats.mybatis3.model" targetProject="\MBGTestProject\src">
+        <javaModelGenerator targetPackage="com.bytebeats.mybatis3.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.bytebeats.mybatis3.mapper"  targetProject="\MBGTestProject\src">
+        <sqlMapGenerator targetPackage="mapper.trade"  targetProject="src/main/resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="test.dao"  targetProject="\MBGTestProject\src">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.bytebeats.mybatis3.mapper"  targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
+        <table schema="DB2ADMIN" tableName="tb_customer" domainObjectName="Customer" >
             <property name="useActualColumnNames" value="true"/>
-            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <generatedKey column="ID" sqlStatement="mysql" identity="true" />
             <columnOverride column="DATE_FIELD" property="startDate" />
             <ignoreColumn column="FRED" />
             <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
