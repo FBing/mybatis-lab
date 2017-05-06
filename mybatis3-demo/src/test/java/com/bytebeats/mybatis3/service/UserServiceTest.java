@@ -1,8 +1,8 @@
 package com.bytebeats.mybatis3.service;
 
 import com.bytebeats.mybatis3.domain.admin.User;
-import com.bytebeats.mybatis3.domain.trade.Order;
 import com.bytebeats.mybatis3.service.admin.UserService;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,14 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
+    @Ignore
     public void testQuery(){
         List<User> userList = userService.getUsers();
         System.out.println("userList size:"+userList.size());
     }
 
     @Test
+    @Ignore
     public void testInsert(){
         User user = getUser();
         boolean result = userService.insert(user);

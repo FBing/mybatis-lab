@@ -2,6 +2,7 @@ package com.bytebeats.mybatis3.service;
 
 import com.bytebeats.mybatis3.domain.trade.Order;
 import com.bytebeats.mybatis3.service.trade.OrderService;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,14 @@ public class OrderServiceTest {
     private OrderService orderService;
 
     @Test
+    @Ignore
     public void testQuery(){
         List<Order> orderList = orderService.getOrderList(3);
         System.out.println("orderList size:"+orderList.size());
     }
 
     @Test
+    @Ignore
     public void testInsert(){
         Order order = getOrder();
         boolean result =  orderService.insert(order);
