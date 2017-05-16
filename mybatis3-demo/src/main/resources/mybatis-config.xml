@@ -5,7 +5,7 @@
 <configuration>
 
     <plugins>
-        <plugin interceptor="com.bytebeats.mybatis3.interceptor.SQLStatsInterceptor">
+        <plugin interceptor="com.mindflow.mybatis3.interceptor.SQLStatsInterceptor">
             <property name="dialect" value="mysql" />
         </plugin>
     </plugins>

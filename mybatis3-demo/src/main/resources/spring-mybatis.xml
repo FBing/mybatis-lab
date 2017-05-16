@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
-       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
     <util:properties id="db" location="classpath:db.properties"/>
 
@@ -60,11 +61,11 @@
         <property name="dataSource" ref="trade" />
         <property name="mapperLocations" value="classpath*:mapper/trade/*Mapper.xml" />
         <property name="configLocation" value="classpath:mybatis-config.xml" />
-        <property name="typeAliasesPackage" value="com.bytebeats.mybatis3.domain.trade" />
+        <property name="typeAliasesPackage" value="com.mindflow.mybatis3.model.trade" />
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.bytebeats.mybatis3.mapper.trade" />
+        <property name="basePackage" value="com.mindflow.mybatis3.mapper.trade" />
         <property name="sqlSessionFactoryBeanName" value="tradeSqlSessionFactory" />
     </bean>
 
@@ -72,10 +73,10 @@
     <bean id="adminSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="admin" />
         <property name="mapperLocations" value="classpath*:mapper/admin/*Mapper.xml" />
-        <property name="typeAliasesPackage" value="com.bytebeats.mybatis3.domain.admin" />
+        <property name="typeAliasesPackage" value="com.mindflow.mybatis3.model.admin" />
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.bytebeats.mybatis3.mapper.admin" />
+        <property name="basePackage" value="com.mindflow.mybatis3.mapper.admin" />
         <property name="sqlSessionFactoryBeanName" value="adminSqlSessionFactory" />
     </bean>
 
